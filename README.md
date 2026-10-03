@@ -37,8 +37,8 @@ formative-2-techniques-1/
 | Validation | 1 500   | 10.40 %  | 49.07 % | 40.53 %  |
 | Test       | 1 500   | 10.40 %  | 49.07 % | 40.53 %  |
 
-- **Source:** Kaggle � https://zindi.world/competitions/to-vaccinate-or-not-to-vaccinate/data
-- **Columns used:** `safe_text` (tweet body), `label` (-1 Negative � 0 Neutral � 1 Positive)
+- **Source:** Kaggle  https://zindi.world/competitions/to-vaccinate-or-not-to-vaccinate/data
+- **Columns used:** `safe_text` (tweet body), `label` (-1 Negative  0 Neutral  1 Positive)
 - Two anomalous records (one NaN label, one fractional label 0.667) were removed, leaving **9 999** clean samples.
 - Labels were remapped to 0 / 1 / 2 for cross-entropy compatibility.
 - Splits are **stratified** (fixed seed `random_state=42`) so every model trains and evaluates on identical data.
@@ -47,20 +47,20 @@ formative-2-techniques-1/
 
 ## Modelling Pipeline
 
-### 1 � Data Inspection & Splitting
+### 1  Data Inspection & Splitting
 Notebook: `data-inspection-and-splitting.ipynb`
 
-- Exploratory analysis: class distribution, tweet-length histogram (mean � 16 words, max 33).
-- Exports `train_split.csv`, `val_split.csv`, and `test_split.csv` � the **single source of truth** for all notebooks.
+- Exploratory analysis: class distribution, tweet-length histogram (mean  16 words, max 33).
+- Exports `train_split.csv`, `val_split.csv`, and `test_split.csv`  the **single source of truth** for all notebooks.
 
-### 2 � Baselines
+### 2  Baselines
 Notebook: `baseline-models-svm-and-naive-bayes.ipynb`
 
 Classical NLP pipelines built on **TF-IDF** representations:
-- Multinomial Na�ve Bayes
+- Multinomial Naive Bayes
 - Support Vector Machine (SVM) with a linear kernel
 
-### 3 � Deep Learning
+### 3  Deep Learning
 Notebook: `vaccinate-or-not-formative-2-cnn-lstm.ipynb`
 
 Neural networks with a learned embedding layer:
@@ -68,7 +68,7 @@ Neural networks with a learned embedding layer:
 - Bidirectional LSTM (Bi-LSTM)
 - Sequence padding set to **35 tokens** (covers the full dataset without waste).
 
-### 4 � Transformer Fine-tuning
+### 4  Transformer Fine-tuning
 Notebook: `transformer-models.ipynb`
 
 Pre-trained language models fine-tuned on the task:
@@ -81,7 +81,7 @@ Pre-trained language models fine-tuned on the task:
 | T4 | bertweet-base + class-weighted CE | 2e-5 | 80.0 % | 79.9 % | 0.745 |
 | T5 | bertweet-base + class & agreement weights | 2e-5 | 79.5 % | 78.9 % | 0.751 |
 
-> **Best model:** `bertweet-base` (T3) � Twitter-domain pre-training gives the largest single improvement.
+> **Best model:** `bertweet-base` (T3)  Twitter-domain pre-training gives the largest single improvement.
 
 ---
 
@@ -89,11 +89,11 @@ Pre-trained language models fine-tuned on the task:
 
 - **Domain matters:** `bertweet-base` (pre-trained on 850 M tweets) outperforms general-domain `distilbert` by ~3 pp accuracy.
 - **Scratch transformer** achieves surprisingly reasonable results (72.5 % test accuracy) but is far below fine-tuned models.
-- **Classical baselines** (SVM / Na�ve Bayes) establish a lower bound; TF-IDF captures unigram statistics but misses contextual cues.
+- **Classical baselines** (SVM / Naive Bayes) establish a lower bound; TF-IDF captures unigram statistics but misses contextual cues.
 - **Minority class (Negative, ~10 %)** remains the hardest to classify across all models; class-weighting partially mitigates this.
 
 ---
 
 ## Reproducibility
 
-All experiments were run on **Kaggle** (Python 3.12, GPU P100) with a fixed random seed (42). The static data splits guarantee identical train/val/test sets across every notebook.
+All experiments were run with a fixed random seed (42). The static data splits guarantee identical train/val/test sets across every notebook.
