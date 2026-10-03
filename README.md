@@ -1,4 +1,4 @@
-# Vaccine Sentiment Classification — TEC1 Formative 2
+# Vaccine Sentiment Classification ï¿½ TEC1 Formative 2
 
 A comparative study of machine-learning approaches for **three-class sentiment analysis** on the *"To Vaccinate or Not to Vaccinate"* Twitter dataset. The goal is to classify social-media posts as **Positive (pro-vaccination)**, **Neutral**, or **Negative (anti-vaccination)**.
 
@@ -6,25 +6,27 @@ A comparative study of machine-learning approaches for **three-class sentiment a
 
 ## Project Structure
 
-`
+```
+
 +-- Dataset/
-¦   +-- Train.csv            # Raw training data (10 001 tweets)
-¦   +-- Test.csv             # Raw held-out test data
+ï¿½   +-- Train.csv            # Raw training data (10 001 tweets)
+ï¿½   +-- Test.csv             # Raw held-out test data
 +-- Split data/
-¦   +-- train_split.csv      # 70 % stratified training split  (6 999 samples)
-¦   +-- val_split.csv        # 15 % stratified validation split (1 500 samples)
-¦   +-- test_split.csv       # 15 % stratified test split       (1 500 samples)
+ï¿½   +-- train_split.csv      # 70 % stratified training split  (6 999 samples)
+ï¿½   +-- val_split.csv        # 15 % stratified validation split (1 500 samples)
+ï¿½   +-- test_split.csv       # 15 % stratified test split       (1 500 samples)
 +-- results/
-¦   +-- transformer/
-¦       +-- transformer_experiments.csv   # Per-experiment metrics
-¦       +-- final_test_predictions.csv    # Best-model predictions on test set
-¦       +-- most_confident_errors.csv     # High-confidence misclassifications
-¦       +-- figures/                      # Training curves & confusion matrices
+ï¿½   +-- transformer/
+ï¿½       +-- transformer_experiments.csv   # Per-experiment metrics
+ï¿½       +-- final_test_predictions.csv    # Best-model predictions on test set
+ï¿½       +-- most_confident_errors.csv     # High-confidence misclassifications
+ï¿½       +-- figures/                      # Training curves & confusion matrices
 +-- data-inspection-and-splitting.ipynb          # EDA + static data splits
-+-- baseline-models-svm-and-naive-bayes.ipynb    # TF-IDF + SVM / Naïve Bayes
++-- baseline-models-svm-and-naive-bayes.ipynb    # TF-IDF + SVM / Naï¿½ve Bayes
 +-- vaccinate-or-not-formative-2-cnn-lstm.ipynb  # CNN & Bi-LSTM models
 +-- transformer-models.ipynb                     # Transformer fine-tuning experiments
-`
+
+```
 
 ---
 
@@ -36,8 +38,8 @@ A comparative study of machine-learning approaches for **three-class sentiment a
 | Validation | 1 500   | 10.40 %  | 49.07 % | 40.53 %  |
 | Test       | 1 500   | 10.40 %  | 49.07 % | 40.53 %  |
 
-- **Source:** Kaggle — *arsenekabasinga/to-vaccinate-or-not-to-vaccinate*
-- **Columns used:** `safe_text` (tweet body), `label` (-1 Negative · 0 Neutral · 1 Positive)
+- **Source:** Kaggle ï¿½ https://zindi.world/competitions/to-vaccinate-or-not-to-vaccinate/data
+- **Columns used:** `safe_text` (tweet body), `label` (-1 Negative ï¿½ 0 Neutral ï¿½ 1 Positive)
 - Two anomalous records (one NaN label, one fractional label 0.667) were removed, leaving **9 999** clean samples.
 - Labels were remapped to 0 / 1 / 2 for cross-entropy compatibility.
 - Splits are **stratified** (fixed seed `random_state=42`) so every model trains and evaluates on identical data.
@@ -46,20 +48,20 @@ A comparative study of machine-learning approaches for **three-class sentiment a
 
 ## Modelling Pipeline
 
-### 1 · Data Inspection & Splitting
+### 1 ï¿½ Data Inspection & Splitting
 Notebook: `data-inspection-and-splitting.ipynb`
 
-- Exploratory analysis: class distribution, tweet-length histogram (mean ˜ 16 words, max 33).
-- Exports `train_split.csv`, `val_split.csv`, and `test_split.csv` — the **single source of truth** for all notebooks.
+- Exploratory analysis: class distribution, tweet-length histogram (mean ï¿½ 16 words, max 33).
+- Exports `train_split.csv`, `val_split.csv`, and `test_split.csv` ï¿½ the **single source of truth** for all notebooks.
 
-### 2 · Baselines
+### 2 ï¿½ Baselines
 Notebook: `baseline-models-svm-and-naive-bayes.ipynb`
 
 Classical NLP pipelines built on **TF-IDF** representations:
-- Multinomial Naïve Bayes
+- Multinomial Naï¿½ve Bayes
 - Support Vector Machine (SVM) with a linear kernel
 
-### 3 · Deep Learning
+### 3 ï¿½ Deep Learning
 Notebook: `vaccinate-or-not-formative-2-cnn-lstm.ipynb`
 
 Neural networks with a learned embedding layer:
@@ -67,7 +69,7 @@ Neural networks with a learned embedding layer:
 - Bidirectional LSTM (Bi-LSTM)
 - Sequence padding set to **35 tokens** (covers the full dataset without waste).
 
-### 4 · Transformer Fine-tuning
+### 4 ï¿½ Transformer Fine-tuning
 Notebook: `transformer-models.ipynb`
 
 Pre-trained language models fine-tuned on the task:
@@ -80,7 +82,7 @@ Pre-trained language models fine-tuned on the task:
 | T4 | bertweet-base + class-weighted CE | 2e-5 | 80.0 % | 79.9 % | 0.745 |
 | T5 | bertweet-base + class & agreement weights | 2e-5 | 79.5 % | 78.9 % | 0.751 |
 
-> **Best model:** `bertweet-base` (T3) — Twitter-domain pre-training gives the largest single improvement.
+> **Best model:** `bertweet-base` (T3) ï¿½ Twitter-domain pre-training gives the largest single improvement.
 
 ---
 
@@ -88,7 +90,7 @@ Pre-trained language models fine-tuned on the task:
 
 - **Domain matters:** `bertweet-base` (pre-trained on 850 M tweets) outperforms general-domain `distilbert` by ~3 pp accuracy.
 - **Scratch transformer** achieves surprisingly reasonable results (72.5 % test accuracy) but is far below fine-tuned models.
-- **Classical baselines** (SVM / Naïve Bayes) establish a lower bound; TF-IDF captures unigram statistics but misses contextual cues.
+- **Classical baselines** (SVM / Naï¿½ve Bayes) establish a lower bound; TF-IDF captures unigram statistics but misses contextual cues.
 - **Minority class (Negative, ~10 %)** remains the hardest to classify across all models; class-weighting partially mitigates this.
 
 ---
