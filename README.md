@@ -1,4 +1,4 @@
-# Vaccine Sentiment Classification � TEC1 Formative 2
+# Vaccine Sentiment Classification  TEC1 Formative 2
 
 A comparative study of machine-learning approaches for **three-class sentiment analysis** on the *"To Vaccinate or Not to Vaccinate"* Twitter dataset. The goal is to classify social-media posts as **Positive (pro-vaccination)**, **Neutral**, or **Negative (anti-vaccination)**.
 
