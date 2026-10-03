@@ -7,25 +7,24 @@ A comparative study of machine-learning approaches for **three-class sentiment a
 ## Project Structure
 
 ```
-
-Dataset/
-   Train.csv            # Raw training data (10 001 tweets)
-   Test.csv             # Raw held-out test data
-Split data/
-   train_split.csv      # 70 % stratified training split  (6 999 samples)
-   val_split.csv        # 15 % stratified validation split (1 500 samples)
-   test_split.csv       # 15 % stratified test split       (1 500 samples)
-results/
-   transformer/
-      transformer_experiments.csv   # Per-experiment metrics
-      final_test_predictions.csv    # Best-model predictions on test set
-      most_confident_errors.csv     # High-confidence misclassifications
-     figures/                      # Training curves & confusion matrices
-data-inspection-and-splitting.ipynb          # EDA + static data splits
-baseline-models-svm-and-naive-bayes.ipynb    # TF-IDF + SVM / Na�ve Bayes
-vaccinate-or-not-formative-2-cnn-lstm.ipynb  # CNN & Bi-LSTM models
-transformer-models.ipynb                     # Transformer fine-tuning experiments
-
+formative-2-techniques-1/
+├── Dataset/
+│   ├── Train.csv            # Raw training data (10 001 tweets)
+│   └── Test.csv             # Raw held-out test data
+├── Split data/
+│   ├── train_split.csv      # 70 % stratified training split  (6 999 samples)
+│   ├── val_split.csv        # 15 % stratified validation split (1 500 samples)
+│   └── test_split.csv       # 15 % stratified test split       (1 500 samples)
+├── results/
+│   └── transformer/
+│       ├── transformer_experiments.csv   # Per-experiment metrics
+│       ├── final_test_predictions.csv    # Best-model predictions on test set
+│       ├── most_confident_errors.csv     # High-confidence misclassifications
+│       └── figures/                      # Training curves & confusion matrices
+├── data-inspection-and-splitting.ipynb          # EDA + static data splits
+├── baseline-models-svm-and-naive-bayes.ipynb    # TF-IDF + SVM / Naive Bayes
+├── vaccinate-or-not-formative-2-cnn-lstm.ipynb  # CNN & Bi-LSTM models
+└── transformer-models.ipynb                     # Transformer fine-tuning experiments
 ```
 
 ---
